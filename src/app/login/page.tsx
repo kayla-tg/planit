@@ -1,20 +1,21 @@
 'use client'
 
 import { useContext, useState } from "react"
-import { getUserByEmail} from "@/types/User"
-import { LoginForm } from "@/types/Form"
+import { getUserByEmail, User} from "@/types/User"
 import { AuthContext } from "@/context/AuthContext"
 import Link from "next/link"
 
 export default function Page () {
     const authContext = useContext(AuthContext)
     const [error, setError] = useState("")
-    const [loginForm, setLoginForm] = useState<LoginForm> ( {
+    const [loginForm, setLoginForm] = useState<User> ( {
+        id: '',
+        name: '',
         email: '',
         password: '' 
     })
 
-    const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement>): void => {
         const {name, value} = event.target
         setLoginForm(currState => ({
             ...currState,
@@ -22,10 +23,10 @@ export default function Page () {
         }))
     }
 
-    const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event?.preventDefault()
         try {
-            let existingUser = await getUserByEmail(loginForm.email)
+            const existingUser = await getUserByEmail(loginForm.email)
             if (existingUser !== null) {
                 if (existingUser?.password === loginForm?.password) {
                     authContext.login(crypto.randomUUID(), existingUser)
