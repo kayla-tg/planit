@@ -2,6 +2,7 @@
 
 import { JSX, useContext, useEffect, useState } from "react"
 import { AuthContext } from "@/context/AuthContext"
+import Link from "next/link"
 
 export const Header = () => {
     const authContext = useContext(AuthContext)
@@ -15,7 +16,10 @@ export const Header = () => {
             )
         } else {
             setNavbar(
-                <p>login and signup</p>
+                <nav>
+                    <Link href="/login">Login</Link>
+                    <Link href="/signup">Signup</Link>
+                </nav>
             )
         }
     }, [authContext.token, authContext.currentUser])

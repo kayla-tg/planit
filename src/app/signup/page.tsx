@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react"
 import Link from "next/link"
 import { getUserByEmail, createUser } from "@/types/User"
@@ -35,7 +37,7 @@ export default function Page() {
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    placeholder="Billie Eilish"
+                    placeholder="John Doe"
                     id="name"
                     name="name"
                     value={signupForm.name}
@@ -44,7 +46,7 @@ export default function Page() {
                 </input>
                 <input
                     type="email"
-                    placeholder="billie@example.com"
+                    placeholder="johndoe@example.com"
                     id="email"
                     name="email"
                     value={signupForm.email}
@@ -61,7 +63,7 @@ export default function Page() {
                     onChange={handleChange}
                     required>
                 </input>
-                <button type="submit">Signup</button>
+                <button type="submit">Sign up!</button>
             </form>
             <p>{error}</p>
             <p>Already have an account? <Link href="/login">Log in.</Link></p>

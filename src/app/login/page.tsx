@@ -65,7 +65,7 @@ export default function Page () {
                     onChange={handleChange}
                     required>
                 </input>
-                <button type="submit">Login</button>
+                <button type="submit">Log in.</button>
             </form>
             <p>{error}</p>
             <p>Don't have an account? <Link href="/signup">Sign up!</Link></p>
