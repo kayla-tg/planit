@@ -1,6 +1,6 @@
 'use client'
 
-import { User } from "@/types/User"
+import { User } from "@/types/user"
 import { createContext, ReactNode, useEffect, useState } from "react"
 
 interface AuthContextValue {
@@ -18,11 +18,11 @@ export const AuthContext = createContext<AuthContextValue>({
 })
 
 export const AuthProvider: React.FC<{children: ReactNode}> = ({children}) => {
+    const [token, setToken] = useState(() => window.localStorage.getItem('authToken'))
     const [currentUser, setCurrentUser] = useState(() => {
         const existingUser = localStorage.getItem('currentUser')
         return existingUser ? JSON.parse(existingUser) : null
     })
-    const [token, setToken] = useState(() => window.localStorage.getItem('authToken'))
 
     const login = (userToken: string | null, userInfo: User | null) => {
     if (userToken && userInfo) {

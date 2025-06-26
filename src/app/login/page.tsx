@@ -1,7 +1,8 @@
 'use client'
 
 import { useContext, useState } from "react"
-import { getUserByEmail, User} from "@/types/User"
+import { User } from "@/types/user"
+import { getUserByEmail} from "@/lib/users"
 import { AuthContext } from "@/context/AuthContext"
 import Link from "next/link"
 
@@ -48,7 +49,7 @@ export default function Page () {
             <form onSubmit={handleSubmit}>
                 <input
                     type="email"
-                    placeholder="billie@example.com"
+                    placeholder="Email"
                     id="email"
                     name="email"
                     value={loginForm.email}
