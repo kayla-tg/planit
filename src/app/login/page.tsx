@@ -2,7 +2,7 @@
 
 import { useContext, useState } from "react"
 import { User } from "@/types/user"
-import { getUserByEmail} from "@/lib/users"
+import { fetchUserByEmail} from "@/lib/users"
 import { AuthContext } from "@/context/AuthContext"
 import Link from "next/link"
 
@@ -27,7 +27,7 @@ export default function Page () {
     const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event?.preventDefault()
         try {
-            const existingUser = await getUserByEmail(loginForm.email)
+            const existingUser = await fetchUserByEmail(loginForm.email)
             if (existingUser !== null) {
                 if (existingUser?.password === loginForm?.password) {
                     authContext.login(crypto.randomUUID(), existingUser)

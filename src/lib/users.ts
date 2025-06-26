@@ -1,6 +1,6 @@
 import { User } from "@/types/user"
 
-export const fetchUsers = async (): Promise<User[] | []> => {
+export const fetchUsers = async (): Promise<User[]> => {
     const url=`api/users`
     const response = await fetch(url, {
         method: "GET"
@@ -8,10 +8,10 @@ export const fetchUsers = async (): Promise<User[] | []> => {
     if (!response.ok) {
         throw new Error("Network request failed")
     }
-    return await response.json() as User[] || []
+    return await response.json() as User[]
 }
 
-export const fetchCreateUser = async (newUser: User): Promise<User | null> => {
+export const fetchCreateUser = async (newUser: User): Promise<User> => {
     const url = `/api/users`
     const response = await fetch(url, {
         method: "POST",
@@ -26,8 +26,8 @@ export const fetchCreateUser = async (newUser: User): Promise<User | null> => {
     return await response.json() as User
 }
 
-export const fetchUpdateUser = async (id: string, existingUser: User): Promise<User | null> => {
-    const url = `/api/users/id=${id}`
+export const fetchUpdateUser = async (id: string, existingUser: User): Promise<User> => {
+    const url = `/api/users?id=${id}`
     const response = await fetch(url, {
         method: "PUT",
         headers: {
@@ -38,29 +38,29 @@ export const fetchUpdateUser = async (id: string, existingUser: User): Promise<U
     if (!response.ok) {
         throw new Error("Network request failed")
     }
-    return await response.json() as User || null
+    return await response.json() as User
 }
 
-export const fetchDeleteUser = async (id: string): Promise<User | null> => {
-    const url = `/api/users/id=${id}`
+export const fetchDeleteUser = async (id: string): Promise<User> => {
+    const url = `/api/users?id=${id}`
     const response = await fetch(url, {
         method: "DELETE"
     })
     if (!response.ok) {
         throw new Error("Network request failed")
     }
-    return await response.json() as User || null
+    return await response.json() as User
 }
 
 
 
-export const getUserByEmail = async (email: string): Promise<User | null> => {
-    const url = `/api/users/email=${email}`
+export const fetchUserByEmail = async (email: string): Promise<User | undefined> => {
+    const url = `/api/users?email=${email}`
     const response = await fetch(url, {
         method: "GET"
     })
     if (!response.ok) {
-        throw new Error("Network request failed")
+        return
     }
-    return await response.json() as User || null
+    return await response.json() as User
 }

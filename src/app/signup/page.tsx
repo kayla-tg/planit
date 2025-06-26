@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { getUserByEmail, fetchCreateUser } from "@/lib/users"
+import { fetchUserByEmail, fetchCreateUser } from "@/lib/users"
 import { User } from "@/types/user"
 
 export default function Page() {
@@ -24,7 +24,7 @@ export default function Page() {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault()
-        if (await getUserByEmail(signupForm.email) !== null) {
+        if (!await fetchUserByEmail(signupForm.email)) {
             await fetchCreateUser(signupForm)
         } else {
             setError(`A user with that email already exists.`)
